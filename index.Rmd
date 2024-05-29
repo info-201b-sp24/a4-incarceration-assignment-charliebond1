@@ -5,67 +5,70 @@ output: html_document
 
 ### Introduction
 
-An introduction of the problem domain and a description of the variable(s) you are choosing to analyze (and why!)
+The purpose of this assignment is to assess the overrepresentation of minority groups in prisons and jails across the United States, and explore how it varies across time and location, specifically how it varies in urban counties. The data shows that these problems persist in many dimensions. 
 
 ### Summary Information
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
+```{r}
+source("summary.R")
+rmarkdown::paged_table(summary_us_prison_pop)
+```
+The summary table collects some important values to keep in mind when looking at this dataset. This part of our data is concerned with the 26 year period, from 1992 to 2018. Across this period of time, the average population of a US county is 234,750 while the average prison age population per county is 157,555. The average male prison population is 971, while the average femail prison population is 66. This is important to keep in the back of our minds for charts looking at intersectional breakdowns of race and gender, noting how skewed the data is towards male prison representation. Most significant to remember from the data, we have average white prisoner population, average latinx prisoner population, and average black prisoner population, which are 318, 247, and 431 per county respectively. I have then adjusted this to show the proportion of each racial demographic that is in prison for each county, which found 0.3%, 2.2%, and 0.7% for white, black, and latinx populations respectively. 
 
-These will likely be calculated using your DPLYR skills, answering questions such as: 
 
-- What is the average value of my variable across all the counties (in the current year)?
-- Where is my variable the highest / lowest?
-- How much has my variable change over the last N years?
-
-Feel free to calculate and report values that you find relevant. Again, remember that the purpose is to think about how these measure of incarceration vary by race.
 
 ### The Dataset
 
 Who collected the data?  
+
+  This data was collected by the Vera Institute, a nonprofit organization that does research on the criminal justice system as well as policy research. 
+
 How was the data collected or generated?  
+
+  The data is  collected over the time period from 1970 to 2018, on the county level across many measures of racial makeup for prison and jail populations. 
+
 Why was the data collected?  
+
+  The aim of collecting this data was for Vera to use to communicate information about racial disparities in prisons and jails across the country and over time, in pursuit of helping spread awareness towards the criminal justice system and end mass incarceration, which is one of their main goals listed on their website. 
+
 How many observations (rows) are in your data?  
+
+  There are 153,811 observations in the prison and jail datasets.
+
 How many features (columns) are in the data?  
+  The dataset on prisons has 36 features, while the dataset on jail populations has 28 features. 
+
 What, if any, ethical questions or questions of power do you need to consider when working with this data?  
 What are possible limitations or problems with this data?   (at least 200 words)
+
+  There is much to be interpreted from this data, which must be taken with care if we want to use the data to challenge forms of oppression whether than perpetuate them. The need to interpret this dataset through a frame of intersectionality is obvious when viewing it - seen by the different breakdowns of variables, including "black_female_prison_pop" and "black_male_prison_pop". We cannot rely on any false objectivity to make statements about what we see in the data. The data implicitly says a lot about power relationships in the justice system that can't be viewed in a vacuum. We need to consider what inferences we might make or what gaps exist in the data, or how to interpret "NA" values. Because there are so many "NA" values, this is a definte limitation of the dataset. Apart from the "why"s, we need to consider  what motivates these differences and trends, why they persist, and what narratives we may feed into when reporting observations from these datasets. This data is collected across many states and many counties that will differ greatly in local laws and practices, and our data may be limited by technical considerations of what qualifies for certain variables in a given year.  There are many stages of collection and interpretation that yield implicit biases that may reinforce stereotypes and narratives of oppression, which need to be addressed at every stage of the process. 
 
 
 ### Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+This chart was included to give an idea of the demographics of prison populations over time, to give an idea of how the situation has changed over the yeras. It is worth noting that the first few years of the data range has a large fluctuation of values, while the lines converge around certain levels for each racial group as time goes one. 
 
-The first chart that you will create and include will show the trend over time of your variable/topic. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - This may mean showing the same measure for different locations or different racial groups. Think carefully about a meaningful comparison of locations (e.g., the top 10 counties in a state, top 10 states, etc.)
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear legend title
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart1_example.R")}
+```{r}
+source("Chart1_over_time.R")
+plot(prison_rates_over_time)
 ```
+
 
 ### Variable Comparison Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+This plot looks specifically at the percentage that black men compose of prison populations in urban counties. This reveals a trend, where apart from clusters of outliers, it appears that black men become more overrepreseented in prison populations as county population decreases. 
 
-The second chart that you will create and include will show how two different (continuous) variables are related to one another. Again, think carefully about what such a comparison means and what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- If you choose to add a color encoding (not required), you need a legend for your different color and a clear legend title
+```{r}
+source("Chart2_two_variables.R")
+plot(black_male_prop_versus_population)
+```
 
 ### Map
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+This map shows the places with the largest increases in black jail populations in the aftermath of the War on Drugs and the 1990's crime legislation. It appears to have created surges in black jail populations across the US, particularly in counties throughout the Southwest. 
 
-The last chart that you will create and include will show how a variable is distributed geographically. Again, think carefully about what such a comparison means and what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Your map needs a title
-- Your color scale needs a legend with a clear label
-- Use a map based coordinate system to set the aspect ratio of your map
+```{r}
+source("US_map_plot.R")
+plot(themap)
+```
 
