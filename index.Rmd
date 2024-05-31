@@ -9,7 +9,7 @@ The purpose of this assignment is to assess the overrepresentation of minority g
 
 ### Summary Information
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 source("summary.R")
 rmarkdown::paged_table(summary_us_prison_pop)
 ```
@@ -50,7 +50,6 @@ This chart was included to give an idea of the demographics of prison population
 
 ```{r}
 source("Chart1_over_time.R")
-plot(prison_rates_over_time)
 ```
 
 
@@ -60,7 +59,6 @@ This plot looks specifically at the percentage that black men compose of prison 
 
 ```{r}
 source("Chart2_two_variables.R")
-plot(black_male_prop_versus_population)
 ```
 
 ### Map
@@ -69,6 +67,5 @@ This map shows the places with the largest increases in black jail populations i
 
 ```{r}
 source("US_map_plot.R")
-plot(themap)
 ```
 
